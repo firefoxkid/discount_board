@@ -1,0 +1,43 @@
+{% load user_filters %}
+
+{% if user.is_authenticated %}
+  <div class="card my-4">
+    <form method="post" enctype="multipart/form-data" action={% url 'add_comment' post.author.username post.id  %}>
+      {% csrf_token %}
+      <h5 class="card-header">Добавить комментарий:</h5>
+      <div class="card-body">
+        <div class="form-group">
+          {{ form.text|addclass:"form-control" }}
+        </div>
+        <button type="submit" class="btn btn-secondary">Отправить</button>
+        <a class="btn btn-secondary" href="{% url 'index' %}">На главную</a>
+        <a class="btn btn-secondary" href="#" onclick="history.back();">Назад</a>
+      </div>
+    </form>
+  </div>
+{% endif %}
+
+<!-- Комментарии -->
+{% if comments %}
+<p>Комментарии к публикации:</p>
+{% endif %}
+{% for item in comments %}
+  <div class="media card mb-4">
+    <div class="media-body card-body">
+      <h6 class="mt-0">
+        <a 
+          href="{% url 'profile' item.author.username %}"
+          name="comment_{{ item.id }}">
+          <strong class="d-block text-gray-dark"> {{ item.author.username }} </strong>
+        </a>
+      </h6>
+      <p>{{ item.text|linebreaksbr }}</p>
+      {% if item.author == user %}
+      <a class="btn btn-secondary" href="{% url 'comment_del' post.author.username post.id item.id%}" role="button">
+        Удалить
+      </a>
+      {% endif %}
+      <p class="btn btn-sm text-muted">Комментарий от: {{ item.created | date:"d m Y в H:i" }} по Мск</p>
+    </div>
+  </div>
+{% endfor %} 

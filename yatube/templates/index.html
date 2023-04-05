@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Последние обновления на сайте{% endblock %}
+{% block header %}Социальная сеть джунов <span style="color:red">Ya-</span>Dude{% endblock %}
+{% block content %}
+{% load thumbnail %}
+
+{% load cache %}
+{% cache 20 index_page using key page %}
+  <div class="container">
+    <!-- Вывод ленты записей -->
+    {% include "menu.html" with index=True %}
+    {% for post in page %}
+      <!-- Вот он, новый include! -->
+      {% include "post_item.html" %}
+    {% endfor %}
+  </div>
+
+  <!-- Вывод паджинатора -->
+  {% include "misc/paginator.html" with items=page paginator=paginator%}
+{% endcache %}
+
+{% endblock %}

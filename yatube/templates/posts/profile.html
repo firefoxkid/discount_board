@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% block title %}Об авторе поста{% endblock %}
+
+{% block content %}
+<main role="main" class="container">
+    <div class="row">
+      
+      {% include "misc/user_info.html" %}
+      
+      
+      <div class="col-md-9">
+
+        <div class="container">
+          <!-- Вывод ленты записей -->
+          {% for post in page %}
+            <!-- Вот он, новый include! -->
+            {% include "post_item.html" %}
+          {% endfor %}
+        </div>
+        {% include "misc/paginator.html" %}
+      </div>
+    </div>
+  </main> 
+{% endblock %} 

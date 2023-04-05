@@ -149,4 +149,19 @@ dmypy.json
 static/
 yatube/posts/static/
 yatube/media/
+/static
+/posts/static
+static
+static/
+.static
 
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover 
+
+.media
+media
+media/
+/posts/media

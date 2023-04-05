@@ -1,0 +1,15 @@
+<nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand" href="/"><span style="color:red">Ya-</span>Dude</a>
+    <nav class="my-2 my-md-0 mr-md-3">
+      {% if user.is_authenticated %}
+      <span style="color:white">Вы авторизованы! Пользователь: <span class="navbar-brand" style="color:red">{{ user.username }}.</span>  </span>
+      <a href="{% url 'new_post' %}" class="btn btn-secondary">Создать запись  </a>
+      
+      <a class="btn btn-secondary" href="{% url 'password_change' %}">Изменить пароль</a>
+      <a class="btn btn-secondary" href="{% url 'logout' %}">Выйти</a>
+      {% else %}
+      <a class="btn btn-secondary" href="{% url 'login' %}">Войти</a> |
+      <a class="btn btn-secondary" href="{% url 'signup' %}">Регистрация</a>
+      {% endif %}
+    </nav>
+  </nav>
