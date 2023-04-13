@@ -79,3 +79,23 @@ class Follow(models.Model):
 
     def __str__(self):
         return f'Результат: {self.user}  подписался на {self.author}'
+
+
+class Likee(models.Model):
+    
+    """Лайк (приму участие)"""
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        verbose_name='Участник',
+        related_name='participant'
+    )
+    event = models.ForeignKey(
+        Post,
+        on_delete=models.CASCADE,
+        verbose_name='Событие (мероприятие)',
+        related_name='event'
+    )
+
+    def __str__(self):
+        return f'Результат: {self.user}  подписался на {self.event}'
