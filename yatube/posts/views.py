@@ -71,6 +71,7 @@ def post_view(request, username, post_id):
                              )
     from_post_view = True
     comments = post.comments.all()
+    event_likes = post.event.all()
     form = CommentForm()
     username = post.author.username
     return render(request, 'posts/post.html',
@@ -78,6 +79,7 @@ def post_view(request, username, post_id):
                    'post_id': post_id,
                    'username': username,
                    'author': post.author,
+                   'likes': event_likes,
                    'comments': comments,
                    'form': form,
                    'from_post_view': from_post_view

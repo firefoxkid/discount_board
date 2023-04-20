@@ -53,6 +53,9 @@
   
         <!-- Дата публикации поста -->
         <small class="text-muted">Опубликовано:    {{ post.pub_date |date:"d m Y в H:i" }} по Мск</small>
+        <div>
+          <small class="text-muted">Буду участвовать: {{ post.event.count }}</small>
+        </div>
       </div>
     </div>
   </div> 

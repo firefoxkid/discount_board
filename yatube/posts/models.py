@@ -90,7 +90,7 @@ class Likee(models.Model):
         verbose_name='Участник',
         related_name='participant'
     )
-    event = models.ForeignKey(
+    post = models.ForeignKey(
         Post,
         on_delete=models.CASCADE,
         verbose_name='Событие (мероприятие)',
