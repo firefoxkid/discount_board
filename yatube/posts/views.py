@@ -1,7 +1,7 @@
 from django.core.paginator import Paginator
 from django.shortcuts import redirect, render, get_object_or_404
 
-from .models import Group, Post, Follow, Comment
+from .models import Group, Post, Follow, Comment, Likee
 from .forms import PostForm, CommentForm
 
 from django.contrib.auth import get_user_model
@@ -201,3 +201,15 @@ def comment_del(request, username, post_id, comment_id):
         return redirect('post', username, post_id)
     comment.delete()
     return redirect('post', username, post_id)
+
+
+@login_required
+def event_like(request, username, post_id):
+    Likee.objects.get_or_create(user=request.user, event=post_id)
+    return redirect('post_view', username=username, post_id=post_id)
+
+
+@login_required
+def event_unlike(request, username, post_id):
+    Likee.objects.filter(user=request.user, event=post_id).delete()
+    return redirect('post_view', username=username, post_id=post_id)
