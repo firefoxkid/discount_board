@@ -31,4 +31,8 @@ urlpatterns = [
          views.comment_del,
          name="comment_del"),
 
+
+    path("<int:post_id>", views.event_like, name="event_like"),
+
+
 ]
